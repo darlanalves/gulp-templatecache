@@ -1,5 +1,5 @@
 {
-  "name": "gulp-templateCache",
+  "name": "gulp-templatecache",
   "version": "0.0.1",
   "description": "Gulp plugin to join AngularJS templates in one JavaScript template cache",
   "main": "index.js",
