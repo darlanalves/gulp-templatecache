@@ -1,0 +1,24 @@
+{
+  "name": "gulp-templateCache",
+  "version": "0.0.1",
+  "description": "Gulp plugin to join AngularJS templates in one JavaScript template cache",
+  "main": "index.js",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/darlanalves/gulp-templateCache.git"
+  },
+  "keywords": [
+    "gulpplugin"
+  ],
+  "author": "darlanalves",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/darlanalves/gulp-templateCache/issues"
+  },
+  "dependencies": {
+    "gulp-util": "~2.2.9",
+    "through": "~2.3.4",
+    "html-minifier": "~0.5.5"
+  }
+}
