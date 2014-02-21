@@ -1,4 +1,4 @@
-gulp-html2js
+gulp-templatecache
 ============
 
 Gulp plugin to join AngularJS templates in one JavaScript template cache
@@ -70,6 +70,7 @@ If ommitted, the HTML is kept untouched
 ## Based on:
 
 [gulp-extend](https://github.com/adamayres/gulp-extend)
+
 [karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor)
 
 ## LICENSE
