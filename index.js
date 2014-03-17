@@ -18,6 +18,10 @@ function escapeHtmlContent(content) {
 	return content.replace(reQuote, escapedQuote).replace(reNewLine, escapedNewLine);
 }
 
+function escapeTags(content) {
+	return content.replace(/</mg, '&lt;').replace(/>/mg, '&gt;');
+}
+
 function angularModuleTemplate(moduleName, templateCode) {
 	return 'angular.module("' + moduleName + '").run([\'$templateCache\', function(a) { ' + templateCode + ' }]);';
 }
@@ -35,7 +39,8 @@ function transformTemplates(templates, strip, prepend, minify) {
 
 function transformTemplateEntry(entry, strip, prepend, minify) {
 	var path = entry.path,
-		content = entry.content;
+		content = entry.content,
+		parseError;
 
 	if (strip) {
 		path = path.split(strip);
@@ -48,7 +53,14 @@ function transformTemplateEntry(entry, strip, prepend, minify) {
 	}
 
 	if (minify !== false) {
-		content = htmlMin(content, minify);
+		try {
+			content = htmlMin(content, minify);
+		} catch (e) {
+			parseError = String(e);
+
+			content = '<h1>Invalid template: ' + entry.path + '</h1>' +
+				'<pre>' + escapeTags(parseError) + '</pre>';
+		}
 	}
 
 	content = escapeHtmlContent(content);
