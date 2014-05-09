@@ -45,7 +45,7 @@ function transformTemplateEntry(entry, strip, prepend, minify) {
 	if (strip) {
 		path = path.split(strip);
 		path.shift();
-		path = path.join(strip);
+		path = path.join(strip).replace(/\\/g, '/');
 	}
 
 	if (prepend) {
