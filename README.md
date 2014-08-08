@@ -8,7 +8,9 @@ Gulp plugin to join AngularJS templates in one JavaScript template cache
 ## Information
 
 ## Install
+
 Install with [npm](https://npmjs.org/package/gulp-templatecache)
+
 `npm install --save-dev gulp-templatecache`
 
 ## Usage
@@ -21,6 +23,7 @@ gulp.task('scripts', function() {
     output: 'public/templates.js',
     strip: 'public/templates',
     prepend: 'partials',
+    moduleName: 'templates',
     minify: {}
   }
 
@@ -44,6 +47,11 @@ This plugin converts a group of templates to JavaScript (html escaped as JS) and
 Type: `String`
 
 The output filename
+
+#### moduleName
+Type: `String`
+
+The AngularJS module name to use, as `tplModule` in `angular.module('tplModule')`
 
 #### strip
 
