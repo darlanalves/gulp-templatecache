@@ -11,18 +11,20 @@ Gulp plugin to join AngularJS templates in one JavaScript template cache
 
 Install with [npm](https://npmjs.org/package/gulp-templatecache)
 
+
 `npm install --save-dev gulp-templatecache`
 
 ## Usage
 
 ```javascript
-var templateCache = require('gulp-templateCache')
+var templateCache = require('gulp-templatecache')
 
 gulp.task('scripts', function() {
   var options = {
     output: 'public/templates.js',
     strip: 'public/templates',
     prepend: 'partials',
+    // angular module name
     moduleName: 'templates',
     minify: {}
   }
@@ -30,6 +32,11 @@ gulp.task('scripts', function() {
   gulp.src('public/templates/**/*.html')
     .pipe(templateCache(options))
     .pipe(gulp.dest('./'))
+    
+  // the result is a file with all templates inside
+  // registered on module "templates" with the
+  // path being transformed into "partials/**/*.html"
+  // and saved to "public/templates.js"
 })
 ```
 

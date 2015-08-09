@@ -1,4 +1,5 @@
 'use strict';
+/* jshint node: true */
 
 var PLUGIN_NAME = 'gulp-templateCache',
 
@@ -22,8 +23,16 @@ function escapeTags(content) {
 	return content.replace(/</mg, '&lt;').replace(/>/mg, '&gt;');
 }
 
-function angularModuleTemplate(moduleName, templateCode) {
-	return 'angular.module("' + moduleName + '").run([\'$templateCache\', function(a) { ' + templateCode + ' }]);';
+function angularModuleTemplate(moduleName, templateCode, options) {
+	var output = 'angular.module(';
+
+	if (options.singleQuotes) {
+		output += "'" + moduleName + "'";
+	} else {
+		output += '"' + moduleName + '"';
+	}
+
+	return output + ').run([\'$templateCache\', function(a) { ' + templateCode + ' }]);';
 }
 
 function transformTemplates(templates, strip, prepend, minify) {
@@ -122,7 +131,7 @@ module.exports = function(options) {
 				cwd: firstFile.cwd,
 				base: firstFile.base,
 				path: joinedPath,
-				contents: new Buffer(angularModuleTemplate(moduleName, joinedContents))
+				contents: new Buffer(angularModuleTemplate(moduleName, joinedContents, options))
 			});
 
 		this.emit('data', joinedFile);
