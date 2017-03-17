@@ -17,32 +17,32 @@ Install with [npm](https://npmjs.org/package/gulp-templatecache)
 ## Usage
 
 ```javascript
-var templateCache = require('gulp-templatecache')
 
-gulp.task('scripts', function() {
-  var options = {
-    output: 'public/templates.js',
-    stripFromPath: 'public/templates',
-    prependToPath: 'partials',
-    // angular module name
-    moduleName: 'templates',
-    minify: {}
-  }
+gulp.task('templates', function() {
+    var templateCache = require('gulp-templatecache');
+    var options = {
+        output: 'templates.js',
+        stripFromPath: '/src/templates',
+        prependToPath: '/app',
+        moduleName: 'app.templates',
+        minify: true
+    }
 
-  gulp.src('public/templates/**/*.html')
+  gulp.src('src/templates/**/*.html')
     .pipe(templateCache(options))
-    .pipe(gulp.dest('./'))
+    .pipe(gulp.dest('./dist/'))
     
-  // the result is a file with all templates inside
-  // registered on module "templates" with the
-  // path being transformed into "partials/**/*.html"
-  // and saved to "public/templates.js"
-})
+  // the result is a file (dist/templates.js) that has all templates 
+  // converted to JS strings and injected into $templateCache of a 
+  // module called 'app.templates', for all HTML files found inside
+  // src/templates. A file under src/templates/foo.html will be injected
+  // as /app/foo.html into template cache
+
 ```
 
 ## Overview
 
-This plugin converts a group of templates to JavaScript (html escaped as JS) and put them inside a `module.run()` block to inject them right into $templateCache
+This plugin converts HTML templates to JavaScript (HTML escaped as JS) and put them inside a `module.run()` block to inject them right into $templateCache
 
 ## API
 
@@ -72,7 +72,7 @@ Path fragment to remove from template path (from beginning of all template paths
 Type: `String`
 Default: ``
 
-Path fragment to insert at beginning of all template path
+Path fragment to insert at beginning of all template paths
 
 #### minify
 
@@ -81,12 +81,6 @@ Default: `false`
 
 Configs to pass on [html-minifier](https://github.com/kangax/html-minifier). 
 If ommitted or `false`, the HTML is kept untouched
-
-## Based on:
-
-[gulp-extend](https://github.com/adamayres/gulp-extend)
-
-[karma-ng-html2js-preprocessor](https://github.com/karma-runner/karma-ng-html2js-preprocessor)
 
 ## LICENSE
 
