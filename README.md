@@ -22,8 +22,8 @@ var templateCache = require('gulp-templatecache')
 gulp.task('scripts', function() {
   var options = {
     output: 'public/templates.js',
-    strip: 'public/templates',
-    prepend: 'partials',
+    stripFromPath: 'public/templates',
+    prependToPath: 'partials',
     // angular module name
     moduleName: 'templates',
     minify: {}
@@ -58,29 +58,29 @@ The output filename
 #### moduleName
 Type: `String`
 
-The AngularJS module name to use, as `tplModule` in `angular.module('tplModule')`
+The AngularJS module name to use. If the module does not exists yet, it will create one.
 
-#### strip
-
-Type: `String`
-Default: ``
-
-Path fragment to remove from template path (from left)
-
-#### prepend
+#### stripFromPath
 
 Type: `String`
 Default: ``
 
-Path fragment to insert before the template path
+Path fragment to remove from template path (from beginning of all template paths)
 
-#### htmlmin
+#### prependToPath
 
-Type: `Object`
+Type: `String`
+Default: ``
+
+Path fragment to insert at beginning of all template path
+
+#### minify
+
+Type: `Object|Boolean`
 Default: `false`
 
 Configs to pass on [html-minifier](https://github.com/kangax/html-minifier). 
-If ommitted, the HTML is kept untouched
+If ommitted or `false`, the HTML is kept untouched
 
 ## Based on:
 
@@ -93,4 +93,3 @@ If ommitted, the HTML is kept untouched
 [MIT License](http://en.wikipedia.org/wiki/MIT_License)
 
 [npm-url]: https://npmjs.org/package/gulp-templateCache
-[npm-image]: https://badge.fury.io/js/gulp-extend.png

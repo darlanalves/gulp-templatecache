@@ -62,7 +62,7 @@ module.exports = function(options) {
 			stripFromPath: options.stripFromPath || options.strip || '',
 			prependToPath: options.prependToPath || options.prepend || '',
 			useSingleQuotes: options.singleQuotes || options.useSingleQuotes,
-			minify: options.minify,
+			minify: options.minify || false,
 			moduleName: options.moduleName,
 			templates: templates
 		};
